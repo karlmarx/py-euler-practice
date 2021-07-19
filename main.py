@@ -38,7 +38,7 @@ for i in range(3, int(math.sqrt(n))+1, 2):
 if n > 2:
     largest = n
 logger.info(largest)
- 4 
+# 4 
 max = 0
 for i in range (100,1000):
     for j in range (100,1000):
@@ -46,7 +46,6 @@ for i in range (100,1000):
         if test == int(str(test)[::-1]) and test > max:
             max = test
 logger.info(max)
-'''
 # 5
 from itertools import count
 for i in count(20):
@@ -55,3 +54,7 @@ for i in count(20):
         break
 
 
+# 6
+logger.info(sum(map(lambda i : i**2, range (1,101)))-sum(range(1,101))**2)
+'''
+# 7
