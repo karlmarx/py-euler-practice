@@ -424,3 +424,13 @@ def euler_24():
 
     return lexperm(digits)
 
+#25
+def fibonacci_to_length(num_digits: int):
+    # count = 0
+    numbers = [1,1]
+    while len(str(numbers[-1])) < num_digits:
+        new = sum(numbers[-2:])
+        numbers.append(new)
+    return len(numbers)
+
+
