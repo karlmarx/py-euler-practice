@@ -85,4 +85,52 @@ def non_trivial():
 
     return str(Fraction(math.prod(nom), math.prod(denom)).denominator)
 
+#34
 
+def digit_factorials() -> int:
+    factorials = [1]
+    for i in range(1,10):
+        factorials.append(reduce(lambda a,b: a*b,  range(1,i+1)))
+    print(factorials)
+
+    return sum(digit for digit in range(3,factorials[9]*9) if sum(factorials[int(digit)] for digit in str(digit)) == digit)
+
+
+# 37
+def truncatable_primes(limit: int) -> int:
+    primes = [True for i in range(limit+1)]
+    p=2
+
+    while p**2 < limit:
+        if(primes[p] == True):
+            for x in range(p*2,limit+1,p):
+                primes[x] = False
+        p += 1
+    primes[0] = False
+    primes[1] = False
+
+    gen = (i for i,x in enumerate(primes) if x and i > 11)
+    prime_numbers = list(gen)
+    count = 0
+    sum =0
+    while count < 11:
+        for prime in prime_numbers:
+            truncatable = True
+            ends = all(primes[int(str(prime)[i:])] for i in range(len(str(prime))))
+            beginnings = all(primes[int(str(prime)[:j])] for j in range(1,len(str(prime))))
+            if ends and beginnings:
+                print(prime)
+                sum += prime
+                count += 1
+
+    return sum
+
+
+#42 coded triangle numbers
+def tri_words(word_list: list) ->int:
+    triangles = [int((x*.5)*(x+1)) for x in itertools.takewhile(lambda x: (x*.5)*(x+1) < 2600, itertools.count())]
+    letter_value = {}
+    for i, letter in enumerate('ABCDEFGHIJKLMNOPQRSTUVWXYZ'):
+        letter_value[letter] = i+1
+    return sum(1 for word in word_list if sum(map(lambda a: letter_value[a], word)) in triangles)
+    # print(f"{word}{sum(map(lambda a: letter_value[a], list(word)))}")
